@@ -110,9 +110,18 @@ class Circuit_Checker:
 		error_sum = [0 for i in range(self.rows)]
 		covered_inputs = []
 		
+		cols = 0
+		# Check if inputs have errors
+		for c in range ((self.inputs+1)*2):
+			for r in range (self.rows):
+				if self.diff_matrix[r][c] == 1:
+					cols += 1
+					break
+			
 		# Cycle through difference table until all inputs are covered
-		i = 0
-		while i < (self.inputs*2)+2 :
+		i = 0	
+		while i < cols:
+		#while i < (self.inputs*2)+2 :
 			# 
 			error_sum = [0 for i in range(self.rows)]
 			# Compute list of sums for each row
@@ -207,7 +216,7 @@ class Circuit_Checker:
 				print ("")
 
 if __name__ == '__main__':
-	circuit = Circuit_Checker (3)
+	circuit = Circuit_Checker (5)
 	circuit.show_truth_table ()
 	circuit.show_error_table ()
 	circuit.show_diff_table ()
